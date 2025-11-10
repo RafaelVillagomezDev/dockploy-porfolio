@@ -1,0 +1,12 @@
+@use "./mixin" ;
+
+.image_resize{
+    
+    @include media(xs){
+        width: 100%;
+    }
+    @include media(sm){
+        width:auto;
+    }
+    
+}

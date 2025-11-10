@@ -1,0 +1,59 @@
+@import './mixin.scss' ;
+
+
+
+.container__main{
+  width: 100%;
+  height: 100%;
+}
+
+
+.icon__burguer{
+   width: 30px;
+   height: 30px;
+}
+
+.icon__burguer-close{
+   border: none;
+   background-color: transparent;
+   width: 100%;
+   height: 20px;
+   max-height: 30px;
+}
+
+html {
+    scroll-behavior: smooth;
+  }
+/* Works on Firefox */
+
+body{
+  position: relative;
+  height: 100%;
+}
+  /* Works on Chrome, Edge, and Safari */
+  ::-webkit-scrollbar {
+    width: 8px;
+    padding: 22px;
+    
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: black;
+    
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: white;
+    border-radius: 20px;
+    height: 10px;
+    border-color: white;
+  }
+
+  .swiper {
+    width: 100%;
+    height: 100%;
+  }
+  
+ 
+  
+ 
