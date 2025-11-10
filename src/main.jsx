@@ -33,7 +33,12 @@ const router = createBrowserRouter([
   {
     path: "*",
     element: <Navigate to="/" replace />
-  }
+  },
+  {
+
+    path: "/porfolio", 
+    element: <Navigate to="/porfolio/" replace /> 
+  },
 
 ], {
   basename: '/porfolio/'
