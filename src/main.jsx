@@ -1,6 +1,6 @@
 import { StrictMode, lazy, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import './index.css'
 
@@ -16,21 +16,24 @@ const router = createBrowserRouter([
     element: < Home />,
 
   },
-   {
+  {
     path: "/about",
     element: <About />,
-  
+
   },
   {
     path: "/home",
-    element: <Home/>,
-    
+    element: <Home />,
+
   },
-   {
+  {
     path: "/proyects",
     element: <Proyects />,
-    
   },
+  {
+    path: "*",
+    element: <Navigate to="/" replace />
+  }
 
 ], {
   basename: '/porfolio/'

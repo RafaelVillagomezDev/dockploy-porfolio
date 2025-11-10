@@ -1,19 +1,18 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
-// 🔑 Importar el plugin de compresión de imágenes
 import imagemin from 'vite-plugin-imagemin';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  // 1. BASE URL para subdirectorio de producción
   base: "/porfolio/",
 
   plugins: [
     react(),
 
-    // 🔑 1. COMPRESIÓN DE IMÁGENES
+    // 2. COMPRESIÓN DE IMÁGENES (Ejecuta npm install -D vite-plugin-imagemin)
     imagemin({
-      // Puedes configurar qué tipos de compresión usar
       gifsicle: { optimizationLevel: 7 },
       optipng: { optimizationLevel: 7 },
       mozjpeg: { quality: 80 },
@@ -31,12 +30,12 @@ export default defineConfig({
           },
         }],
       },
-      // Habilita la compresión durante el build
       verbose: true,
     }),
   ],
 
   resolve: {
+    // 3. ALIAS DE RUTA
     alias: [
       { find: '@public', replacement: path.resolve(__dirname, './public') },
       { find: '@components', replacement: path.resolve(__dirname, './src/components') },
@@ -44,47 +43,44 @@ export default defineConfig({
     ],
   },
 
-  // 🔑 2. OPTIMIZACIÓN DEL BUILD (Code Splitting y CSS)
+  // 4. OPTIMIZACIÓN DE PRODUCCIÓN (BUILD)
   build: {
-    // Genera sourcemaps para facilitar la depuración de producción
-    sourcemap: false,
-
-    // Configuración para el Code Splitting
+    sourcemap: false, // Desactiva sourcemaps en producción por defecto
+    cssMinify: 'esbuild', // Minificación rápida de CSS
+    
     rollupOptions: {
       output: {
-        // Separa las librerías grandes (como React, React Router) en un chunk separado.
-        // Esto ayuda al caching del navegador.
+        // Formato de nombre de archivos con hash para mejor caching
+        entryFileNames: `assets/[name]-[hash].js`, 
+        chunkFileNames: `assets/[name]-[hash].js`, 
+        assetFileNames: `assets/[name]-[hash].[ext]`, 
+        
+        // CODE SPLITTING AVANZADO (Separación de Vendors)
         manualChunks(id) {
-          // 1. Chunk para React Core
+          // 4.1. React Core (Núcleo de React)
           if (id.includes('node_modules') && id.includes('react')) {
-            // Agrupa react, react-dom, y sus paquetes relacionados
             return 'react-core';
           }
 
-          // 2. Chunk para librerías grandes (Ej. styled-components)
-          // Busca el nombre de tu librería en la ruta.
+          // 4.2. Librerías Grandes (Ej. styled-components)
           if (id.includes('node_modules/styled-components')) {
             return 'styled-vendor';
           }
-
-          // 3. Chunk genérico (resto de las dependencias)
+          
+          // 4.3. Chunk genérico (resto de las dependencias pequeñas)
           if (id.includes('node_modules')) {
             return 'vendor-common';
           }
         },
       },
     },
-
-    // 🔑 3. MINIFICACIÓN Y CSS
-    // Vite usa Terser por defecto, que comprime automáticamente JS.
-    // CSS: Vite comprime CSS automáticamente usando esbuild/PostCSS.
-    cssMinify: 'esbuild',
   },
 
+  // 5. CONFIGURACIÓN DEL SERVIDOR DE DESARROLLO
   server: {
     port: 8080,
     strictPort: true,
-    host: true,
+    host: true, // Permite acceso externo (útil para desarrollo móvil)
     origin: "http://0.0.0.0:8080",
   },
 
