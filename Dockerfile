@@ -7,7 +7,7 @@ FROM base AS build
 WORKDIR /app
 COPY . .
 COPY package.json pnpm-lock.yaml ./
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install
 RUN pnpm run build
 
 FROM base AS dokploy
