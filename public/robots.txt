@@ -1,7 +1,6 @@
 User-agent: *
 Disallow: /.nginx/
 Disallow: /.github/
-Disallow: /dist/
 Disallow: /api/
 Disallow: /tmp/
 Disallow: /node_modules/
