@@ -11,6 +11,7 @@ import {
     PrimaryButton,
     SecondaryButton
 } from './styles/CookieBanner';
+import { pushToDataLayer } from '../../utils/dataLayerHelper';
 
 
 const CookieBanner = () => {
@@ -25,11 +26,22 @@ const CookieBanner = () => {
         acceptConsent('analytics');
         acceptConsent('advertising');
         acceptConsent('functional');
+
+        pushToDataLayer({
+            'event': 'consent_granted', // <--- Disparador de GTM
+            'analytics_storage': 'granted',
+            'ad_storage': 'granted'
+        });
         setIsVisible(false);
     };
 
     const handleRejectAll = () => {
         rejectConsent();
+        pushToDataLayer({
+        'event': 'consent_updated', 
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied'
+    });
         setIsVisible(false);
     };
 
