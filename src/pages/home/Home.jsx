@@ -10,12 +10,21 @@ function Home() {
   return (
     <Suspense fallback={<LoadingScreen />}>
       <Helmet>
-        <title>Yandry | Home</title>
-        <meta name="description" content="Esta es la home page" />
+    <title>Yandry | Home</title>
+    
 
-        <meta name="description" content="Explora mi porfolio Yandry, un ingeniero de software especializado en desarrollo web, aplicaciones web, diseño responsive, node js , api , endpoint. Descubre mis proyectos y habilidades en yandrydev.es." />
-        <meta name="keywords" content="ingeniero de software, desarrollador web,Python, JavaScript, DevOps, seguridad en software, programación moderna, portafolio de software, desarollador front,desdarollador fullstack,desarrollador web, dessarollador back, back,front" />
-      </Helmet>
+    <meta name="description" content="Explora mi porfolio Yandry, un ingeniero de software especializado en desarrollo web y Fullstack. Descubre mis proyectos y habilidades en yandrydev.cloud." />
+    
+    <meta name="keywords" content="ingeniero de software, desarrollador web,Python, JavaScript, Node , Express, PHP..." />
+
+    {/* Etiquetas Open Graph (¡CRUCIALES!) */}
+    <meta property="og:title" content="Yandry | Desarrollador Fullstack" />
+    <meta property="og:description" content="Explora mi porfolio Yandry, un ingeniero de software especializado en desarrollo web..." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://yandrydev.cloud/home" />
+    <meta property="og:image" content="https://yandrydev.cloud/porfolio/dist/favicon.ico" /> 
+    <link rel="canonical" href="https://yandrydev.cloud/home" />
+</Helmet>
       <Header />
       <Content />
       <Footer />

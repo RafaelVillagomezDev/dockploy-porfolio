@@ -13,7 +13,7 @@ import {
 } from "./styles/about";
 const Header = lazy(() => import("@components/Header/Header"));
 const Footer = lazy(() => import("@components/Footer/Footer"));
-const CardAboutPage = lazy(() =>import("@components/CardAboutPage/CardAboutPage"));
+const CardAboutPage = lazy(() => import("@components/CardAboutPage/CardAboutPage"));
 
 import { IoArrowBack } from "react-icons/io5";
 import { LazyLoadImage } from "react-lazy-load-image-component";
@@ -28,16 +28,31 @@ function About() {
   return (
     <Suspense fallback={<LoadingScreen />}>
       <Helmet>
-        <title>Yandry | Acerca de mí</title>
+
+        <title>Yandry | Acerca de mí | Desarrollador Fullstack</title> 
         <meta
           name="description"
-          content="Soy Yandry, un desarrollador web en Madrid, España, apasionado por el trabajo en equipo y la innovación en el desarrollo de productos digitales. Constantemente aprendo y aplico nuevas tendencias para crear aplicaciones útiles."
+          content="Soy Yandry, un desarrollador web Fullstack en Madrid, España, apasionado por el trabajo en equipo y la innovación. Con experiencia en React, Node.js y Python, constantemente aplico nuevas tendencias para crear aplicaciones web útiles y escalables."
         />
         <meta
           name="keywords"
-          content="desarrollador web, trabajo en equipo, tendencias de desarrollo web, feedback en proyectos, aplicaciones útiles, Madrid, España, innovación en software, Yandry,web, APIs, React, Node.js, PHP, Python, SQL, MySQL, Docker, frontend"
+          content="desarrollador web, trabajo en equipo, tendencias de desarrollo web, Madrid, España, innovación en software, Yandry, Fullstack, APIs, React, Node.js, Python, SQL, Docker, frontend, backend"
         />
-        <link rel="canonical" href="https://yandrydev.cloud/porfolio" />
+
+
+        <meta property="og:title" content="Conoce a Yandry Villa | Desarrollador Fullstack en Madrid" />
+        <meta property="og:description" content="Soy Yandry, un desarrollador web Fullstack con base en Madrid, especializado en construir productos digitales innovadores y escalables." />
+        <meta property="og:type" content="profile" />
+        <meta property="og:url" content="https://yandrydev.cloud/porfolio/about" />
+        <meta property="og:image" content="https://yandrydev.cloud/images/yandry_perfil_social.jpg" />
+        <meta property="og:locale" content="es_ES" />
+
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:creator" content="@TuUsuarioDeTwitter" />
+        <meta name="twitter:title" content="Yandry Villa | Desarrollador Fullstack" />
+
+        <link rel="canonical" href="https://yandrydev.cloud/porfolio/about" />
         <link rel="icon" href="https://yandrydev.cloud/porfolio/favicon.ico" />
         <meta name="robots" content="index, follow" />
       </Helmet>

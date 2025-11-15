@@ -21,4 +21,4 @@ Allow: /
 
 # Sitemap location
 
-Sitemap: https://yandrydev.es/sitemap.xml
+Sitemap: https://yandrydev.cloud/sitemap.xml
