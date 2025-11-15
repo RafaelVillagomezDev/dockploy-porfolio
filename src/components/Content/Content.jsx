@@ -21,6 +21,7 @@ import cv from "@public/assets/pdf/cv_yandry_villagomez_2024.pdf";
 import CardAbout from "@components/CardAbout/CardAbout";
 import Skills from "@components/Skills/Skills";
 import Proyects from "@components/Proyects/Proyects";
+import { pushToDataLayer } from "../../utils/dataLayerHelper";
 
 
 
@@ -53,6 +54,14 @@ function Content() {
     return <BoxSkill key={element.name}>{element.name}</BoxSkill>;
   });
 
+  const download_cv=()=>{
+    pushToDataLayer({
+        'event': 'cv_download_click', 
+        'document_type': 'CV',      
+        'user_status': 'logged_in' // Parámetro de contexto
+    });
+  }
+
 
 
   return (
@@ -74,7 +83,7 @@ function Content() {
                   <ButtonTitle>Proyectos<BsLaptop /></ButtonTitle>
                 </PortadaButton>
                 <CvButton
-
+                  onClick={download_cv}
                   href={cv}
                   target="_blank"
                   rel="cv"

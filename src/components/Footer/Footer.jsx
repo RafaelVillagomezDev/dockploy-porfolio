@@ -18,25 +18,35 @@ import whatsapp from "../../../public/assets/icons/whatsapp.webp";
 function Footer() {
   const LinkData = [
     {
-      id: 1,
+      id: "Gmail",
       enlace: "mailto:yandry75@gmail.com?Subject=Oferta%20de%20trabajo%20",
       contentUrl: gmail,
       label:"Ir a email"
     },
     {
-      id: 2,
+      id: "Lkdn",
       enlace: "https://www.linkedin.com/in/rafaelvillagomez/",
       contentUrl: linkdn,
       label:"Ir a linkdln"
     },
     {
-      id: 3,
+      id: "Whatsapp",
       enlace:
         "https://wa.me/618152241?text=Hola%20Yandry%20me%20gustaria%20hablar%20de%20trabajo%20",
       contentUrl: whatsapp,
       label:"Ir a whatsapp"
     },
   ];
+
+   const pushToTrackSocial = (platformName) => {
+      pushToDataLayer({
+          'event': 'social_link_click', 
+          'social_platform': platformName,
+          'page_location': window.location.pathname
+      });
+      console.log("dataLayer PUSH:", platformName);
+  };
+  
 
   const elemLinkNav = LinkData.map((element) => {
     return (
@@ -45,6 +55,7 @@ function Footer() {
         key={element.id}
         contentUrl={element.contentUrl}
         target="_blank"
+        onClick={() => pushToTrackSocial(element.id)}
         aria-label={element.label}
       >
         {element.contentUrl}

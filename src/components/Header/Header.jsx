@@ -22,6 +22,7 @@ import MenuBurguers from "@components/MenuBurguer/MenuBurguer";
 import { BtnTitle } from "../MenuBurguer/styles/menu";
 import { FaBars } from "react-icons/fa6";
 import Form from "@components/Portals/Form";
+import { pushToDataLayer } from "../../utils/dataLayerHelper";
 
 function Header() {
   const [theme, setTheme] = useState("light");
@@ -49,34 +50,42 @@ function Header() {
   };
   const LinkData = [
     {
-      id: "inicio",
-      name: "Inicio",
-      enlace: "/home",
-      label: "Ir a home",
+      id: "Gmail",
+      name: "Gmail",
+      enlace: "mailto:yandry75@gmail.com",
+      label: "Gmail",
       contentUrl: gmail,
     },
     {
-      id: "acerca",
-      name: "Acerca de mi",
-      enlace: "/about",
-      label: "Ir a about",
+      id: "Lnkdn",
+      name: "Lnkdn",
+      enlace: "https://www.linkedin.com/in/rafaelvillagomez/",
+      label: "Lnkdn",
       contentUrl: linkdn,
     },
     {
-      id: "proyectos",
-      name: "Proyectos",
+      id: "Whatsapp",
+      name: "Whatsapp",
       enlace:
-        "/about",
-      label: "Ir a proyectos",
+        "https://wa.me/+34618152241",
+      label: "Whatsapp",
       contentUrl: whatsapp,
     },
   ];
 
 
+  const pushToTrackSocial = (platformName) => {
+    pushToDataLayer({
+        'event': 'social_link_click', 
+        'social_platform': platformName,
+        'page_location': window.location.pathname
+    });
+    console.log("dataLayer PUSH:", platformName);
+};
 
   const elemLink = LinkData.map((element) => {
     return (
-      <LinkPersonalized aria-label={element.label} to={element.enlace} key={element.id} contentUrl={element.contentUrl}>
+      <LinkPersonalized onClick={() => pushToTrackSocial(element.name)}  aria-label={element.label} to={element.enlace} key={element.id} contentUrl={element.contentUrl} target="_blank">
         {element.name}
       </LinkPersonalized>
     );
