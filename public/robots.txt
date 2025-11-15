@@ -1,22 +1,24 @@
 User-agent: *
-Disallow: /.nginx/
-Disallow: /.github/
+
+# BLOQUEOS ESENCIALES: Solo directorios que nunca deberían ser públicos
 Disallow: /api/
 Disallow: /tmp/
 Disallow: /node_modules/
-Disallow: /scripts/
 Disallow: /src/
+Disallow: /.github/
+Disallow: /.nginx/
 Disallow: /etc/
-Disallow: /*.json$
-Disallow: /*.md$
-Disallow: /*.yml$
-Disallow: /*.babelrc$
-Disallow: /*.env$
-Disallow: /*.gitignore$
 
-# Allow indexing of the rest of the site
+# BLOQUEOS DE ARCHIVOS DE CONFIGURACIÓN SENSIBLES
+Disallow: /*.env$
+Disallow: /*.json$
+Disallow: /*.babelrc$
+
+# PERMITIR RASTREO:
+# Permite el acceso a la carpeta /portfolio/ y todas sus subcarpetas.
+Allow: /portfolio/
+
+# Permite el acceso a todos los demás archivos que no están en las reglas de Disallow (incluyendo /dist/ si no la bloqueaste)
 Allow: /
 
-# Sitemap location
-
-Sitemap: https://yandrydev.cloud/sitemap.xml
+Sitemap: https://yandrydev.cloud/porfolio/sitemap.xml
