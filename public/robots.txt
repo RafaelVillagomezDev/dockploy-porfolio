@@ -1,6 +1,6 @@
 User-agent: *
 
-# BLOQUEOS ESENCIALES: Solo directorios que nunca deberían ser públicos
+# BLOQUEOS ESENCIALES: Directorios que contienen código fuente o secretos
 Disallow: /api/
 Disallow: /tmp/
 Disallow: /node_modules/
@@ -8,17 +8,25 @@ Disallow: /src/
 Disallow: /.github/
 Disallow: /.nginx/
 Disallow: /etc/
+Disallow: /build/   # Bloquea carpeta común de build
+Disallow: /dist/    # Bloquea carpeta común de build (aunque la necesites, la línea 'Allow: /' abajo lo permite si está en la raíz)
 
 # BLOQUEOS DE ARCHIVOS DE CONFIGURACIÓN SENSIBLES
 Disallow: /*.env$
 Disallow: /*.json$
 Disallow: /*.babelrc$
 
-# PERMITIR RASTREO:
-# Permite el acceso a la carpeta /porfolio/ y todas sus subcarpetas.
+# -------------------------------------------------------------
+# REGLAS DE ACCESO
+# -------------------------------------------------------------
+
+# Permitir el acceso explícito al subdirectorio donde está la SPA
 Allow: /porfolio/
 
-# Permite el acceso a todos los demás archivos que no están en las reglas de Disallow (incluyendo /dist/ si no la bloqueaste)
+# Permitir el acceso a todos los demás archivos y assets de la raíz
+# Esto anula parcialmente los bloqueos anteriores para archivos esenciales
+# (Ej: /main.js si está en la raíz, pero protege /api/)
 Allow: /
 
-Sitemap: https://yandrydev.cloud/porfolio/sitemap.xml
+# UBICACIÓN DEL SITEMAP (¡CORREGIDO!)
+Sitemap: https://yandrydev.cloud/sitemap.xml
