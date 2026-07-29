@@ -3,11 +3,7 @@ FROM node:22-alpine AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 
-# Desactivar la restricción estricta de scripts en PNPM / Corepack
-ENV COREPACK_ENABLE_STRICT=0
-ENV PNPM_CONFIG_ONLY_BUILT_DEPENDENCIES_FILE=false
-
-# Instalar herramientas para que imagemin compile sin errores
+# Herramientas de compilación para gifsicle y mozjpeg
 RUN apk add --no-cache \
     autoconf \
     automake \
@@ -23,17 +19,16 @@ RUN corepack enable
 FROM base AS build
 WORKDIR /app
 
-COPY package.json pnpm-lock.yaml ./
+# Copia los manifestos Y el archivo .npmrc
+COPY package.json pnpm-lock.yaml .npmrc ./
 
-# Desactivar la validación de build scripts durante la instalación
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store \
-    pnpm config set only-built-dependencies-file false && \
-    pnpm install --no-frozen-lockfile
+# Instala dependencias (ahora leerá la regla del .npmrc automáticamente)
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install
 
 COPY . .
 RUN pnpm run build
 
-# 3. ETAPA FINAL DOKPLOY
+# 3. ETAPA DOKPLOY (Nginx)
 FROM nginx:alpine AS dokploy
 
 COPY --from=build /app/dist /usr/share/nginx/html
