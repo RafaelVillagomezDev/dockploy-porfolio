@@ -3,7 +3,7 @@ FROM node:22-alpine AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 
-# Instalar dependencias del sistema necesarias
+# Herramientas de sistema para compilar imagemin
 RUN apk add --no-cache \
     autoconf \
     automake \
@@ -21,11 +21,8 @@ WORKDIR /app
 
 COPY package.json pnpm-lock.yaml ./
 
-# Permite ejecutar todos los build scripts (evita ERR_PNPM_IGNORED_BUILDS)
-ENV PNPM_ALLOW_BUILDS=all
-
-# Instala las dependencias autorizando los scripts
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --unsafe-perm
+# Instalar dependencias (PNPM 11 leerá "onlyBuiltDependencies" de tu package.json)
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install
 
 COPY . .
 RUN pnpm run build
