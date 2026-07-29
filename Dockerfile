@@ -1,7 +1,11 @@
-# 1. ETAPA BASE: Node 22 + Herramientas de compilación
+# 1. ETAPA BASE
 FROM node:22-alpine AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
+
+# Desactivar la restricción estricta de scripts en PNPM / Corepack
+ENV COREPACK_ENABLE_STRICT=0
+ENV PNPM_CONFIG_ONLY_BUILT_DEPENDENCIES_FILE=false
 
 # Instalar herramientas para que imagemin compile sin errores
 RUN apk add --no-cache \
@@ -15,21 +19,23 @@ RUN apk add --no-cache \
 
 RUN corepack enable
 
-# 2. ETAPA DE BUILD: Instalar dependencias y compilar
+# 2. ETAPA DE BUILD
 FROM base AS build
 WORKDIR /app
 
 COPY package.json pnpm-lock.yaml ./
-# Añade el flag para ignorar la restricción de scripts en entornos CI/Docker
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --config.only-built-dependencies=false
+
+# Desactivar la validación de build scripts durante la instalación
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store \
+    pnpm config set only-built-dependencies-file false && \
+    pnpm install --no-frozen-lockfile
 
 COPY . .
 RUN pnpm run build
 
-# 3. ETAPA FINAL: Servidor Nginx llamado "dokploy"
+# 3. ETAPA FINAL DOKPLOY
 FROM nginx:alpine AS dokploy
 
-# Copiar el build compilado por Vite
 COPY --from=build /app/dist /usr/share/nginx/html
 
 EXPOSE 80
