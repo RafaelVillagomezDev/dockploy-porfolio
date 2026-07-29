@@ -3,6 +3,7 @@ FROM node:22-alpine AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 
+# Instalar dependencias del sistema necesarias
 RUN apk add --no-cache \
     autoconf \
     automake \
@@ -18,16 +19,18 @@ RUN corepack enable
 FROM base AS build
 WORKDIR /app
 
-# Copia los manifiestos Y la configuración del workspace
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY package.json pnpm-lock.yaml ./
 
-# Instalar dependencias
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install
+# Permite ejecutar todos los build scripts (evita ERR_PNPM_IGNORED_BUILDS)
+ENV PNPM_ALLOW_BUILDS=all
+
+# Instala las dependencias autorizando los scripts
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --unsafe-perm
 
 COPY . .
 RUN pnpm run build
 
-# 3. ETAPA FINAL DOKPLOY
+# 3. ETAPA DOKPLOY
 FROM nginx:alpine AS dokploy
 
 COPY --from=build /app/dist /usr/share/nginx/html
