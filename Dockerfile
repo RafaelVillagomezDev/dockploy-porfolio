@@ -22,7 +22,11 @@ RUN pnpm run build
 # 3. ETAPA FINAL DOKPLOY (Nginx)
 FROM nginx:alpine AS dokploy
 
-COPY --from=build /app/dist /usr/share/nginx/html
+# A. Copiamos nuestra configuración personalizada de Nginx
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# B. Copiamos el dist DENTRO de la carpeta /porfolio para que coincida con Vite
+COPY --from=build /app/dist /usr/share/nginx/html/porfolio
 
 EXPOSE 80
 
