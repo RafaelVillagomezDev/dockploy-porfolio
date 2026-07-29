@@ -20,7 +20,8 @@ FROM base AS build
 WORKDIR /app
 
 COPY package.json pnpm-lock.yaml ./
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install
+# Añade el flag para ignorar la restricción de scripts en entornos CI/Docker
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --config.only-built-dependencies=false
 
 COPY . .
 RUN pnpm run build
