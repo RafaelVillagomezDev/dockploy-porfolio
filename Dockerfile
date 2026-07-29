@@ -31,6 +31,6 @@ FROM nginx:alpine AS production
 # Copia los archivos estáticos generados por Vite a Nginx
 COPY --from=build /app/dist /usr/share/nginx/html
 
-EXPOSE 80
+EXPOSE 3000
 
 CMD ["nginx", "-g", "daemon off;"]
