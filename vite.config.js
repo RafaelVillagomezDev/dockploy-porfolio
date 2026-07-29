@@ -5,7 +5,7 @@ import path from 'path';
 // https://vitejs.dev/config/
 export default defineConfig({
   // 1. BASE URL para subdirectorio de producción
-  base: "/",
+  base: "/porfolio/",
 
   plugins: [
     react(),
