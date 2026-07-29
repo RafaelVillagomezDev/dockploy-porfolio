@@ -1,4 +1,4 @@
-# 1. ETAPA BASE: Node 22 + Herramientas de compilación Linux
+# 1. ETAPA BASE: Node 22 + Herramientas de compilación
 FROM node:22-alpine AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
@@ -15,7 +15,7 @@ RUN apk add --no-cache \
 
 RUN corepack enable
 
-# 2. ETAPA DE BUILD: Instalar y Compilar Vite
+# 2. ETAPA DE BUILD: Instalar dependencias y compilar
 FROM base AS build
 WORKDIR /app
 
@@ -25,12 +25,12 @@ RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install
 COPY . .
 RUN pnpm run build
 
-# 3. ETAPA DE PRODUCCIÓN: Nginx para servir la Web
-FROM nginx:alpine AS production
+# 3. ETAPA FINAL: Servidor Nginx llamado "dokploy"
+FROM nginx:alpine AS dokploy
 
-# Copia los archivos estáticos generados por Vite a Nginx
+# Copiar el build compilado por Vite
 COPY --from=build /app/dist /usr/share/nginx/html
 
-EXPOSE 3000
+EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
