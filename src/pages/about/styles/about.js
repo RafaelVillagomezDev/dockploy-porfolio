@@ -34,12 +34,25 @@ export const AboutCardMe = styled.div`
   justify-content: space-around;
   padding-top: 58px;
   gap: 3rem;
+  width: 100%; 
 
   @media only screen and (${devices.xs}) {
      flex-direction: column;
   }
   @media only screen and (${devices.md}) {
     flex-direction: row;
+    align-items: center;
+  }
+`;
+
+export const CardMeLeft = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+
+  @media only screen and (${devices.md}) {
+    flex: 1; 
   }
 `;
 
@@ -48,12 +61,28 @@ export const CardMeRight = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-`;
-export const CardMeLeft = styled.div`
-  display: flex;
-  justify-content: center;
+  width: 100%;
+  max-width: 450px; 
+  margin: 0 auto;
 
-  flex-direction: column;
+  @media only screen and (${devices.md}) { 
+    flex: 1; 
+    max-width: none; 
+  }
+
+
+  span {
+    width: 100% !important;
+    display: block !important;
+  }
+
+
+  img {
+    width: 100% !important;
+    height: auto;
+    object-fit: cover;
+    border-radius: 12px; 
+  }
 `;
 
 export const TitleAbout = styled.h1`

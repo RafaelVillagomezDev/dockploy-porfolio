@@ -30,13 +30,19 @@ export const CardAboutBox = styled.div`
 
 export const CardAboutLeft = styled.div`
   display: flex;
+  width: 100%;
+  max-width: 450px;
+  
   @media only screen and (${devices.xs}) {
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
+  
   @media only screen and (${devices.sm}) {
     flex-direction: row;
+    justify-content: center; 
+    align-items: center;
   }
 `;
 

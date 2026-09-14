@@ -29,7 +29,7 @@ function About() {
     <Suspense fallback={<LoadingScreen />}>
       <Helmet>
 
-        <title>Yandry | Acerca de mí | Desarrollador Fullstack</title> 
+        <title>Yandry | Acerca de mí | Desarrollador Fullstack</title>
         <meta
           name="description"
           content="Soy Yandry, un desarrollador web Fullstack en Madrid, España, apasionado por el trabajo en equipo y la innovación. Con experiencia en React, Node.js y Python, constantemente aplico nuevas tendencias para crear aplicaciones web útiles y escalables."
@@ -66,8 +66,8 @@ function About() {
             <CardMeRight>
               <LazyLoadImage
                 alt={"fondo_about"}
-                className="image_resize"
                 src={fondo}
+              
               />
             </CardMeRight>
             <CardMeLeft>
