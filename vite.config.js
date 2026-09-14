@@ -1,18 +1,25 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
+import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
 
-// https://vitejs.dev/config/
+
 export default defineConfig({
-  // 1. BASE URL para subdirectorio de producción
+  
   base: "/porfolio/",
 
   plugins: [
     react(),
+    ViteImageOptimizer({
+      png: { quality: 80 },
+      jpeg: { quality: 80 },
+      jpg: { quality: 80 },
+      webp: { quality: 80, lossless: false },
+    }),
   ],
 
   resolve: {
-    // 2. ALIAS DE RUTA
+  
     alias: [
       { find: '@public', replacement: path.resolve(__dirname, './public') },
       { find: '@components', replacement: path.resolve(__dirname, './src/components') },
@@ -20,7 +27,7 @@ export default defineConfig({
     ],
   },
 
-  // 3. OPTIMIZACIÓN DE PRODUCCIÓN (BUILD)
+  
   build: {
     sourcemap: false, 
     cssMinify: 'esbuild', 
@@ -46,7 +53,7 @@ export default defineConfig({
     },
   },
 
-  // 4. CONFIGURACIÓN DEL SERVIDOR
+  //  CONFIGURACIÓN DEL SERVIDOR
   server: {
     port: 8080,
     strictPort: true,
