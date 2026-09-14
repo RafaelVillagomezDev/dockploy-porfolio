@@ -22,6 +22,9 @@ RUN pnpm run build
 # 3. ETAPA FINAL DOKPLOY (Nginx)
 FROM nginx:alpine AS dokploy
 
+# AÑADE ESTA LÍNEA PARA EL ENRUTAMIENTO DE REACT
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 COPY --from=build /app/dist /usr/share/nginx/html
 
 EXPOSE 80
