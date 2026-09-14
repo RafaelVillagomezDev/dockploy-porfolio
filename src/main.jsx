@@ -6,8 +6,6 @@ import './index.css'
 import CookieBanner from './components/CookieBanner/CookieBanner';
 import { ConsentProvider } from './context/ConsentContext';
 
-
-
 const Home = lazy(() => import("@pages/home/Home.jsx"));
 const About = lazy(() => import("@pages/about/About"));
 const Proyects = lazy(() => import("@pages/proyects/Proyects"));
@@ -16,18 +14,15 @@ const LoadingScreen = lazy(() => import("@pages/loading-screen/LoadingScreen.jsx
 const router = createBrowserRouter([
   {
     path: "/",
-    element: < Home />,
-
+    element: <Home />,
   },
   {
     path: "/about",
     element: <About />,
-
   },
   {
     path: "/home",
-    element: <Home />,
-
+    element: <Home />, 
   },
   {
     path: "/proyects",
@@ -36,15 +31,11 @@ const router = createBrowserRouter([
   {
     path: "*",
     element: <Navigate to="/" replace />
-  },
-  {
-
-    path: "/porfolio",
-    element: <Navigate to="/porfolio/" replace />
-  },
+  }
 
 ], {
-  basename: '/porfolio/'
+
+  basename: '/porfolio'
 });
 
 createRoot(document.getElementById('root')).render(
@@ -59,4 +50,3 @@ createRoot(document.getElementById('root')).render(
     </Suspense>
   </StrictMode>
 )
-
