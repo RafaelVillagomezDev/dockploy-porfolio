@@ -1,29 +1,77 @@
-import { CardProyect, ProyectContainer, ProyectTitle } from "./styles/Proyects";
-import { LinkSkills, ButtonTitle } from "../Skills/styles/Skils";
-import React, { lazy } from "react";
-import { proyects } from "../../proyects";
-import { FaArrowRight } from "react-icons/fa";
+import React from 'react';
+import { 
+  ProyectsSection, 
+  ProyectTitle, 
+  ProyectGrid, 
+  ProyectCard, 
+  ImageWrapper, 
+  ProjectImage, 
+  TextContent, 
+  CardTitle, 
+  CardDescription, 
+  ButtonsWrapper, 
+  GithubButton, 
+  LiveButton 
+} from './styles/Proyects';
+import { proyects } from '../../proyects'; 
+
 function Proyects() {
   return (
-    <>
-      <ProyectContainer>
-        <ProyectTitle>Proyectos</ProyectTitle>
+    <ProyectsSection>
+      <ProyectTitle>Proyectos</ProyectTitle>
+
+      <ProyectGrid>
         {proyects.map((card) => {
           return (
-            <CardProyect
-              key={card.id}
-              alt={card.description}
-              $img={card.thumbnail}
-            ></CardProyect>
+            <ProyectCard key={card.id}>
+              
+            
+              <ImageWrapper 
+                as={card.website ? "a" : "div"} 
+                href={card.website || undefined} 
+                target={card.website ? "_blank" : undefined}
+                rel={card.website ? "noopener noreferrer" : undefined}
+              >
+                <ProjectImage 
+                  src={card.thumbnail} 
+                  alt={card.alt} 
+                />
+              </ImageWrapper>
+
+              <TextContent>
+                <CardTitle>{card.title}</CardTitle>
+                <CardDescription>{card.description}</CardDescription>
+              </TextContent>
+              
+              <ButtonsWrapper>
+               
+                {card.linkGithub && (
+                  <GithubButton 
+                    href={card.linkGithub} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                  >
+                    GitHub
+                  </GithubButton>
+                )}
+                
+         
+                {card.website && (
+                  <LiveButton 
+                    href={card.website} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                  >
+                    Ver Página
+                  </LiveButton>
+                )}
+              </ButtonsWrapper>
+
+            </ProyectCard>
           );
         })}
-      </ProyectContainer>
-      <LinkSkills aria-label="Ir a proyectos" to="/proyects" key="more_proyects">
-        <ButtonTitle >
-          Ver más proyectos <FaArrowRight />
-        </ButtonTitle>
-      </LinkSkills>
-    </>
+      </ProyectGrid>
+    </ProyectsSection>
   );
 }
 

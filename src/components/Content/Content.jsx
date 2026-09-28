@@ -17,7 +17,7 @@ import {
 } from "./styles/Content";
 
 
-import cv from "@public/assets/pdf/cv_yandry_villagomez_2024.pdf";
+import cv from "@public/assets/pdf/cv_yandry_villagomez_2026.pdf";
 import CardAbout from "@components/CardAbout/CardAbout";
 import Skills from "@components/Skills/Skills";
 import Proyects from "@components/Proyects/Proyects";
@@ -48,6 +48,9 @@ function Content() {
     {
       name: "NODE",
     },
+    {
+      name: "VUE"
+    }
   ];
 
   const elemSkill = SkillsData.map((element) => {

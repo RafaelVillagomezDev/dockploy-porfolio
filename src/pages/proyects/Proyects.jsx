@@ -2,6 +2,7 @@ import React, { lazy } from "react";
 import Header from "../../components/Header/Header";
 import { Helmet } from "react-helmet-async";
 import { ContainerProyects } from "./styles/proyects";
+import Proyects from "../../components/Proyects/Proyects";
 
 function About() {
   return (
@@ -31,7 +32,7 @@ function About() {
       </Helmet>
       <Header />
       <ContainerProyects>
-        <h1>Próximamente ..</h1>
+        <Proyects />
       </ContainerProyects>
     </>
   );

@@ -1,4 +1,4 @@
-import {styled, keyframes } from "styled-components";
+import { styled } from "styled-components";
 import { devices } from "../../../styles/mixin_styledComponent";
 import { Link } from "react-router-dom";
 
@@ -21,95 +21,79 @@ export const ButtonContactMobile = styled.div`
   cursor: pointer;
 `;
 
-export const BtnTitle=styled.button`
+export const BtnTitle = styled.button`
   background-color: transparent;
   border: none;
   font-size: 24px;
   color: whitesmoke;
   font-weight: bold;
   cursor: pointer;
-  font-family:"Poppins",sans-serif;
+  font-family: "Poppins", sans-serif;
   @media only screen and (${devices.xs}) {
     display: none;
   }
   @media only screen and (${devices.sm}) {
     display: block;
   }
-  
-`
+`;
 
 /*Menu Hamburguer*/
-
-export const BtnBurguer=styled.button`
-   width:100%;
+export const BtnBurguer = styled.button`
+   width: 100%;
    background-color: transparent;
    border: none;
    height: 30px;
    cursor: pointer;
   @media only screen and (${devices.xs}) {
-    display:block;
+    display: block;
     height: 30px;
   }
-
- 
-
-`
-// Define keyframes for the animation
-const slideIn = keyframes`
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(0);
-  }
 `;
 
-const slideOut = keyframes`
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-100%);
-  }
-`;
-/*Menu Burguer*/
+/* Menu Burguer (ARREGLADO) */
 export const MenuBurguer = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start; 
   align-items: center;
   flex-direction: column;
-  width: 50%;
-  top: 0;
-  left: ${({ $isclicked }) => ($isclicked ? '0' : '-100%')};
+  
   position: fixed;
-  height: 100%;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  
   background-color: #171718;
-  z-index: 2;
   padding: 15px;
-  transition: left 0.5s ease;
-  animation: ${({ $isclicked }) => ($isclicked ? slideIn : slideOut)} 0.5s ease forwards;
+  
+
+  z-index: 9999; 
+
+  transform: ${({ $isclicked }) => ($isclicked ? 'translateX(0)' : 'translateX(-100%)')};
+  transition: transform 0.4s ease-in-out;
+
   @media only screen and (${devices.xs}) {
-    width: 50%;
+    width: 60%; 
   }
   @media only screen and (${devices.sm}) {
-     width:25%;
+     width: 25%;
   }
-
   @media only screen and (${devices.lg}) {
-     width:18%;
+     width: 18%;
   }
- 
 `;
+
 export const HeaderMenuBurguer = styled.div`
   width: 100%;
   height: 75px;
 `;
+
 export const BtnCloseMenu = styled.button`
   float: right;
   background-color: transparent;
   border: none;
   height: 30px;
   cursor: pointer;
+  color: white; /* Añadido para que se vea el icono si es de texto */
 `;
 
 export const ContainerList = styled.div`
@@ -119,8 +103,10 @@ export const ContainerList = styled.div`
   display: flex;
   justify-content: center;
 `;
+
 export const ListMenu = styled.ul`
    height: 75%;
+   padding: 0; /* Resetea el padding por defecto de los ul */
 `;
 
 export const List = styled.li`
@@ -136,47 +122,46 @@ export const LinkList = styled(Link)`
   text-decoration: none;
   color: #FFF;
   font-weight: bold;
-  font-family: "Poppins",sans-serif;
+  font-family: "Poppins", sans-serif;
   display: flex;
   gap: 0.3rem;
   align-items: center;
   align-content: center;
+  
   &:hover {
      border-bottom: 2px solid #47d16e;
   }
 
   @media only screen and (${devices.xs}) {
-    font-size:18px;
-    
+    font-size: 18px;
   }
   @media only screen and (${devices.sm}) {
      font-size: 22px;
   }
 `;
 
-export const ListLink=styled.div`
-   background-color: rebeccapurple;
+export const ListLink = styled.div`
+
    width: 100%;
    height: 100%;
+`;
 
-`
-export const ContainerLink=styled.div`
+export const ContainerLink = styled.div`
    display: flex;
    justify-content: center;
    align-items: center;
    align-content: center;
    column-gap: 1rem;
-`
+`;
 
 export const LinkPersonalized = styled(Link)`
   text-decoration: none;
   color: white;
   width: 28px;
   height: 28px;
-  
   content: url(${(props) => props.contenturl});
+  
   &:hover {
-    color: red;
+    color: #47d16e; 
   }
 `;
-

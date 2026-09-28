@@ -6,7 +6,9 @@ import react from "../../../../public/assets/icons/about/react.webp";
 import python from "../../../../public/assets/icons/about/piton.webp";
 import express from "../../../../public/assets/icons/about/express.webp";
 import redux from "../../../../public/assets/icons/about/redux.webp";
-
+import vue from "../../../../public/assets/icons/about/vue.webp";
+import typescript from "../../../../public/assets/icons/about/typescript.webp";
+import pinia from "../../../../public/assets/icons/about/pinia.webp";
 export const languageSkills = [
   {
     id: 1,
@@ -60,5 +62,23 @@ export const languageSkills = [
     title: "Redux",
     thumbnail: redux,
     text: `Redux radica en su capacidad para gestionar el estado de manera predecible en aplicaciones JavaScript, facilitando la escalabilidad y el mantenimiento del código. Este garantiza una gestión eficiente del estado.`,
+  },
+  {
+    id: 9,
+    title: "Vue.js",
+    thumbnail: vue,
+    text: "Framework progresivo de JavaScript para construir interfaces de usuario interactivas. Destaca por su sistema reactivo, su arquitectura basada en componentes y su excelente rendimiento.",
+  },
+  {
+    id: 10,
+    title: "TypeScript",
+    thumbnail: typescript,
+    text: "TypeScript es un superconjunto de JavaScript que agrega tipado estático. Mejora la calidad del código y la productividad en proyectos grandes.",
+  },
+   {
+    id: 11,
+    title: "Pinia",
+    thumbnail: pinia,
+    text: "Pinia es la nueva librería de gestión de estado para Vue.js. Ofrece una API más limpia y fácil de usar en comparación con Vuex.",
   },
 ];
