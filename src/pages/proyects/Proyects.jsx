@@ -2,7 +2,9 @@ import React, { lazy } from "react";
 import Header from "../../components/Header/Header";
 import { Helmet } from "react-helmet-async";
 import { ContainerProyects } from "./styles/proyects";
-import Proyects from "../../components/Proyects/Proyects";
+
+const Proyects = lazy(() => import("../../components/Proyects/Proyects"));
+const Footer = lazy(() => import("@components/Footer/Footer"));
 
 function About() {
   return (
@@ -34,6 +36,7 @@ function About() {
       <ContainerProyects>
         <Proyects />
       </ContainerProyects>
+      <Footer />
     </>
   );
 }
