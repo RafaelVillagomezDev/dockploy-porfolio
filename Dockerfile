@@ -15,6 +15,7 @@ RUN pnpm run build
 # 3. ETAPA FINAL DOKPLOY (Nginx)
 FROM nginx:alpine AS dokploy
 COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY security-headers.conf /etc/nginx/snippets/security-headers.conf
 
 # MODIFICACIÓN: Creamos y copiamos los archivos a la carpeta del subdirectorio
 COPY --from=build /app/dist /usr/share/nginx/html/porfolio
